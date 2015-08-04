@@ -1,0 +1,14 @@
+{
+  "name": "televy",
+  "description": "reddit-stle video news",
+  "version": "0.0.1",
+  "homepage": "",
+  "license": "televy",
+  "private": true,
+  "dependencies": {
+    "jquery": "2.1.4",
+    "jqueryui": "1.11.4",
+    "underscore": "1.8.3",
+    "backbone": "1.2.1"
+  }
+}

@@ -1,0 +1,6 @@
+*.py[co]
+/config/*.yaml
+log/*.log*
+*.webassets-cache
+node_modules/*
+televy/static/televy/js/*.js
