@@ -1,0 +1,19 @@
+{
+  "name": "televy-web",
+  "version": "0.0.1",
+  "description": "Location-based Video Reddit News WebAp",
+  "main": "televy/server.js",
+  "scripts": {
+    "start": "node televy/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://edwardtseng@bitbucket.org/skylinezum/televy-web.git"
+  },
+  "author": "Edward Tseng",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.3"
+  }
+}
