@@ -1,6 +1,3 @@
-venv
-*.py[co]
-
-*.webassets-cache
+televy/components/.module-cache/*
+televy/components/jsx/*
 node_modules/*
-televy/static/televy/js/*.js
