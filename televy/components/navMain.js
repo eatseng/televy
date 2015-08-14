@@ -7,22 +7,25 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * Application wrapper
+ * Navigation Bar
  */
 
 var React = require("react")
 var Router = require('react-router')
-var RouteHandler = Router.RouteHandler;
-var NavBar = require("./navMain")
 
-module.exports = React.createClass({displayName: "exports",
+var Link = Router.Link;
+var app = require('./app')
+
+var NavMain = React.createClass({displayName: "NavMain",
   render: function () {
     return (
-      React.createElement("div", {className: "app", id: "televy"}, 
-        React.createElement(NavBar, null), 
-        React.createElement(RouteHandler, {data: this.props}), 
-        React.createElement("div", {className: "footer"})
+      React.createElement("ul", {className: "televy-navbar"}, 
+        React.createElement("li", null, React.createElement(Link, {to: "app"}, "Brand")), 
+        React.createElement("li", {className: "center"}), 
+        React.createElement("li", null, "Action")
       )
     );
   }
 });
+
+module.exports = NavMain
