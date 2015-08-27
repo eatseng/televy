@@ -16,8 +16,8 @@ var path = require('path');
 var reactRouter = require('./routes/reactRouter');
 
 // Setup environmental properties
-require('./configs/env');
-console.log(process.env['CONSUMER_KEY'])
+// require('./configs/env');
+// console.log(process.env['CONSUMER_KEY'])
 
 // Model Routes
 apiRoute = require('./routes/apis');
