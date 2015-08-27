@@ -1,5 +1,5 @@
 /* Author: Edward Tseng 
- * Date: 2015 Aug 13
+ * Date: 2015 Aug 27
  * Copyright (c) 2015, Edward Tseng
  * All rights reserved.
  *
@@ -7,39 +7,43 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * Story Store
+ * Report Store
  */
 
 var Dispatcher = require('../dispatcher/televyDispatcher');
 var EventEmitter = require('events').EventEmitter;
-var StoryConstants = require('../constants/storyConstants');
+var ReportConstants = require('../constants/reportConstants');
 var assign = require('object-assign');
 var $ = require('jquery');
 
-var BROADCAST_EVENT = 'story';
-var BROADCAST_ERROR = 'story_error';
+var BROADCAST_EVENT = 'report';
+var BROADCAST_ERROR = 'report_error';
 
-var _stories = [];
-var _story = {};
+var _reports = [];
+var _report = {};
 
 
 function create(text) {
   // Send data to server
   // Get id from server response
   // Update private variables
-  
-
 };
 
-function get(sid, callback) {
+function get(rid, callback) {
   // Get story from the server
-  $.getJSON("/api/stories", {id: sid}, callback);
+  $.getJSON("/api/reports", {id: rid}, callback);
   // console.log("STORE LAUNCHED AJAX")
 };
 
 function getAll(callback) {
   // Get all the story from the server
-  $.getJSON("/api/stories", callback);
+  $.getJSON("/api/reports", callback);
+  // console.log("STORE LAUNCHED AJAX")
+};
+
+function getStoryReports(sid, callback) {
+  // Get story from the server
+  $.getJSON("/api/reports", {storyId: sid}, callback);
   // console.log("STORE LAUNCHED AJAX")
 };
 
@@ -53,13 +57,13 @@ function destory(id) {
   // If resp == 200 update private variables
 };
 
-var StoryStore = assign({}, EventEmitter.prototype, {
+var ReportStore = assign({}, EventEmitter.prototype, {
   getAll: function () {
-    return _stories;
+    return _reports;
   },
 
   get: function () {
-    return _story;
+    return _report;
   },
 
   emitChange: function () {
@@ -81,43 +85,50 @@ var StoryStore = assign({}, EventEmitter.prototype, {
 
 
 // Register callback to dispatcher for story processing
-StoryStore.dispatchToken = Dispatcher.register(function (action) {
+ReportStore.dispatchToken = Dispatcher.register(function (action) {
   var text;
 
   switch(action.actionType) {
-    case StoryConstants.STORY_CREATE:
+    case ReportConstants.REPORT_CREATE:
       text = action.text.trim();
       if (text !== '') {
         create(text);
-        StoryStore.emitChange();
+        ReportStore.emitChange();
       }
       break;
 
-    case StoryConstants.STORY_GET_ALL:
-      getAll(function getAllCallback(data) {
-        _stories = data["stories"];
-        StoryStore.emitChange();  
-      });
-      break;
-    
-    case StoryConstants.STORY_GET:
+    case ReportConstants.REPORT_GET:
       get(action.id, function getCallback(data) {
-        _story = data["stories"][0];
-        StoryStore.emitChange();
+        _report = data["reports"][0];
+        ReportStore.emitChange();
       });
       break;
 
-    case StoryConstants.STORY_UPDATE:
+    case ReportConstants.REPORT_GET_ALL:
+      getAll(function getAllCallback(data) {
+        _reports = data["reports"];
+        ReportStore.emitChange();  
+      });
+      break;
+
+    case ReportConstants.REPORT_GET_STORY:
+      getStoryReports(action.storyId, function getStoryCallback(data) {
+        _reports = data["reports"];
+        ReportStore.emitChange();  
+      });
+      break;
+
+    case ReportConstants.REPORT_UPDATE:
       text = action.text.trim();
       if (text !== '') {
         update(action.id, text);
-        StoryStore.emitChange();
+        ReportStore.emitChange();
       }
       break;
 
-    case StoryConstants.STORY_GET:
+    case ReportConstants.REPORT_GET:
       destory(action.id);
-      StoryStore.emitChange();
+      ReportStore.emitChange();
       break;
 
     default:
@@ -125,5 +136,5 @@ StoryStore.dispatchToken = Dispatcher.register(function (action) {
   }
 });
 
-module.exports = StoryStore;
+module.exports = ReportStore;
 

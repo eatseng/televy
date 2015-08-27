@@ -10,26 +10,31 @@
  * Application routes
  */
 
-var React = require('react')
-var Router = require('react-router')
+var React = require('react');
+var Router = require('react-router');
 
 var DefaultRoute = Router.DefaultRoute;
 var Link = Router.Link;
-var Redirect = Router.Redirect
+var Redirect = Router.Redirect;
 var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
 
-var app = require('./components/app')
-var story = require('./components/story')
-var stories = require('./components/stories')
+var app = require('./components/app');
+var container = require('./components/container');
+var report = require('./components/report');
+var story = require('./components/story');
+var stories = require('./components/stories');
 
 var routes = (
   React.createElement(Route, {name: "app", path: "/", handler: app}, 
-  	React.createElement(Route, {name: "stories", path: "/stories", handler: stories}),
-    React.createElement(Route, {name: "story", path: "/story/:storyId", handler: story}),
+  	React.createElement(Route, {name: "stories", path: "/stories", handler: container},
+      React.createElement(Route, {name: "storyid", path: ":storyId", handler: story}),
+      React.createElement(DefaultRoute, {handler: stories})
+    ),
+    React.createElement(Route, {name: "reportid", path: "/reports/:reportId", handler: report}),
     React.createElement(DefaultRoute, {handler: stories})
   )
   // React.createElement(Redirect, {from: "/", to: "stories"})
 );
 
-module.exports = routes
+module.exports = routes;

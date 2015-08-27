@@ -12,8 +12,9 @@
 var keyMirror = require('keymirror');
 
 module.exports = keyMirror({
-  STORY_CREATE: null,
-  STORY_GET_ALL: null,
-  STORY_GET: null,
-  STORY_DESTROY: null,
+  REPORT_CREATE: null,
+  REPORT_GET: null,
+  REPORT_GET_ALL: null,
+  REPORT_GET_STORY: null,
+  REPORT_DESTROY: null,
 });

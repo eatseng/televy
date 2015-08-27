@@ -25,6 +25,7 @@
     "object-assign": "^3.0.0",
     "keymirror": "^0.1.1",
     "jquery": "^2.1.4",
-    "serve-favicon": "^2.3.0"
+    "serve-favicon": "^2.3.0",
+    "async": "^1.4.2"
   }
 }

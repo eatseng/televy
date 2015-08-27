@@ -1,3 +1,6 @@
 televy/components/.module-cache/*
 televy/components/jsx/*
+televy/configs/env.js
 node_modules/*
+rest.py
+*.bkp

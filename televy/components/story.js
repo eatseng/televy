@@ -10,74 +10,110 @@
  * Story page
  */
 
-var React = require("react")
-var SearchBox = require("./searchBox")
-var VideoPlayer = require("./videoPlayer")
-var StoryStore = require("../stores/storyStore")
-var StoryAction = require("../actions/storyActions")
+var React = require("react");
+var Router = require('react-router');
+var ReportAction = require("../actions/reportActions");
+var ReportStore = require("../stores/reportStore");
+var StoryAction = require("../actions/storyActions");
+var StoryStore = require("../stores/storyStore");
+
+var Link = Router.Link;
 
 var Story = React.createClass({displayName: "Story",
   getInitialState: function () {
-    var id = this.props.params.storyId - 1
-    return {
-      story: this.props.data.stories[id]
-    };
+    if (this.props.data.server_rendering == true ){
+      return {
+        story: this.props.data.stories[0],
+        reports: this.props.data.reports
+      };
+    } else {
+      return {
+        story: {},
+        reports: []
+      };
+    }
   },
 
-  componentWillMount: function () {
-    this.setState({story: {
-        story_id: 0,
-        uuid: 0,
-        reporter_id: 0,
-        timestamp: 0
-      }
-    });
-  },
-
-  componentDidMount: function() {
-    // console.log("story mounted")
+  componentDidMount: function () {
+    // console.log("STORY COMPONENT DID MOUNT")
     // console.log(this.props)
+    StoryStore.addChangeListener(this._onChange);
+    ReportStore.addChangeListener(this._onChange);
 
     // Get new data from API if this page is being revisited
     if (window.value.server_rendering == true ){
-      window.value.server_rendering = false
+      window.value.server_rendering = false;
     } else {
-      StoryAction.get(this.props.params.storyId)
+      StoryAction.get(this.props.params.storyId);
+      ReportAction.getStory(this.props.params.storyId);
     }
 
-    StoryStore.addChangeListener(this._onChange);
   },
 
-  componentWillUnmount: function() {
+  componentWillUnmount: function () {
     StoryStore.removeChangeListener(this._onChange);
+    ReportStore.removeChangeListener(this._onChange);
   },
 
   render: function () {
+    var self = this;
+
+    var reportCardStyle = {
+      cursor: 'pointer'
+    }
+    
+    var reports = null
+    if (this.state.reports.length > 0) {
+      reports = this.state.reports.map(function (report) {
+        return (
+          React.createElement("div", {key: report.id, className: "report-card"}, 
+            React.createElement("div", {className: "report-card-image", style: reportCardStyle}, 
+              React.createElement("p", null, React.createElement(Link, {to: "reportid", params: {reportId: report.id}}, report.reporter_id))
+            ), 
+            React.createElement("div", {className: "report-card-footer"}, 
+              React.createElement("div", {className: "firstPane"}, "Votes"), 
+              React.createElement("div", {className: "secondPane"}, 
+                React.createElement("p", null, "#izzyjames"), 
+                React.createElement("p", null, "#cocahella #indo #OVO")
+              ), 
+              React.createElement("div", {className: "thirdPane"}, 
+                React.createElement("p", null, "Lots of Comments")
+              ), 
+              React.createElement("div", {className: "fourthPane"}, "CiPan")
+            )
+          )
+        );
+      });
+    }
+
     return (
       React.createElement("div", {className: "story-container"}, 
         React.createElement("div", {className: "leftMenu"}, 
           React.createElement("p", null, "Left Menu"), 
-          React.createElement("p", null, "Reporter")
+          React.createElement("p", null, "Search Box")
         ), 
         React.createElement("div", {className: "main"}, 
-          React.createElement(VideoPlayer, {story: this.state.story})
+          reports
         ), 
         React.createElement("div", {className: "rightMenu"}, 
           React.createElement("p", null, "Right Menu"), 
-          React.createElement("p", null, "Comments")
+          React.createElement("p", null, "Activities")
         )
       )
     );
   },
 
   /**
-   * Event handler for 'change' events coming from the StoryStore
+   * Event handler for 'change' events coming from the stores
    */
-  _onChange: function() {
-    this.setState({story: StoryStore.get()});
-    // console.log("STORY ON CHANGE")
+  _onChange: function () {
+    this.setState({
+      reports: ReportStore.getAll(),
+      story: StoryStore.get()
+    });
+    // console.log("REPORT ON CHANGE")
     // console.log(this.state)
   }  
 });
 
-module.exports = Story
+module.exports = Story;

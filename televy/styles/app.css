@@ -53,7 +53,7 @@
   }
   .app#televy > div > .rightMenu {
   	background-color: gray;
-	flex: 2 25%;
+	flex: 1 25%;
   	order: 3;
   }
   .app#televy > .footer {

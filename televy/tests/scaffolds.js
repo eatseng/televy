@@ -11,7 +11,7 @@ var props = module.exports = {initial: {value: 5,
             "reporter_id": "2SpOuQ1LXV",
             "id": 1,
             "uploaded": true,
-            "story_id": 1
+            "id": 1
           },
           {
             "location": {
@@ -24,7 +24,7 @@ var props = module.exports = {initial: {value: 5,
             "reporter_id": "4VkMcI8NDA",
             "id": 2,
             "uploaded": true,
-            "story_id": 2
+            "id": 2
           },
           {
             "location": {
@@ -37,7 +37,7 @@ var props = module.exports = {initial: {value: 5,
             "reporter_id": "9jhBqJ5bBs",
             "id": 3,
             "uploaded": true,
-            "story_id": 3
+            "id": 3
           }
       ]
     },
@@ -53,7 +53,7 @@ var props = module.exports = {initial: {value: 5,
             "reporter_id": "2SpOuQ1LXV",
             "id": 1,
             "uploaded": true,
-            "story_id": 1
+            "id": 1
           },
           {
             "location": {
@@ -66,7 +66,7 @@ var props = module.exports = {initial: {value: 5,
             "reporter_id": "4VkMcI8NDA",
             "id": 2,
             "uploaded": true,
-            "story_id": 2
+            "id": 2
           },
           {
             "location": {
@@ -79,7 +79,7 @@ var props = module.exports = {initial: {value: 5,
             "reporter_id": "9jhBqJ5bBs",
             "id": 3,
             "uploaded": true,
-            "story_id": 3
+            "id": 3
           },
           {
             "location": {
@@ -92,7 +92,7 @@ var props = module.exports = {initial: {value: 5,
             "reporter_id": "7nwOhB3UKx",
             "id": 4,
             "uploaded": true,
-            "story_id": 4
+            "id": 4
           }
        ]
       }

@@ -1,0 +1,133 @@
+/* Author: Edward Tseng 
+ * Date: 2015 Aug 24
+ * Copyright (c) 2015, Edward Tseng
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ * Card CSS
+ */
+
+/******************/
+/* STORY CARD CSS */
+/******************/
+
+.story-card {
+  display: flex;
+  flex-flow: column wrap;
+  background-color: white;
+  text-align: center;
+}
+
+.story-card-footer {
+  display: flex;
+  flex-flow: row wrap;
+  background-color: white;
+  text-align: center;
+}
+
+/* All items are 100% width */
+.story-card-footer > div {
+  flex: 1 100%;
+}
+
+/* We rely on source order for mobile-first approach
+ * in this case:
+ * 1. header
+ * 2. nav
+ * 3. main
+ * 4. aside
+ * 5. footer
+ */
+
+/* Medium screens */
+@media all and (min-width: 600px) {
+  /* We tell both sidebars to share a row */
+  .story-card-footer > div  { flex: 1 auto; }
+}
+
+/* Large screens */
+@media all and (min-width: 800px) {
+  /* We invert order of first sidebar and main
+   * And tell the main element to take twice as much width as the other two sidebars 
+   */
+  .story-card-footer > .firstPane {
+    flex: 1 10%;
+    order: 1; 
+  }
+  .story-card-footer > .secondPane {
+    flex: 2 40%;
+    order: 2;
+  }
+  .story-card-footer > .thirdPane {
+    flex: 2 40%;
+    order: 3;
+  }
+  .story-card-footer > .fourthPane {
+    flex: 1 10%;
+    order: 4;
+  }
+}
+
+/******************/
+/* REPORT CARD CSS */
+/******************/
+
+.report-card {
+  display: flex;
+  flex-flow: column wrap;
+  background-color: white;
+  text-align: center;
+}
+
+.report-card-footer {
+  display: flex;
+  flex-flow: row wrap;
+  background-color: white;
+  text-align: center;
+}
+
+/* All items are 100% width */
+.report-card-footer > div {
+  flex: 1 100%;
+}
+
+/* We rely on source order for mobile-first approach
+ * in this case:
+ * 1. header
+ * 2. nav
+ * 3. main
+ * 4. aside
+ * 5. footer
+ */
+
+/* Medium screens */
+@media all and (min-width: 600px) {
+  /* We tell both sidebars to share a row */
+  .report-card-footer > div  { flex: 1 auto; }
+}
+
+/* Large screens */
+@media all and (min-width: 800px) {
+  /* We invert order of first sidebar and main
+   * And tell the main element to take twice as much width as the other two sidebars 
+   */
+  .report-card-footer > .firstPane {
+    flex: 1 10%;
+    order: 1; 
+  }
+  .report-card-footer > .secondPane {
+    flex: 2 40%;
+    order: 2;
+  }
+  .report-card-footer > .thirdPane {
+    flex: 2 40%;
+    order: 3;
+  }
+  .report-card-footer > .fourthPane {
+    flex: 1 10%;
+    order: 4;
+  }
+}

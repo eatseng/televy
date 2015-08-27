@@ -27,7 +27,7 @@ var VideoPlayer = React.createClass({displayName: "VideoPlayer",
     return (
       React.createElement("div", {className: "videoPlayer"}, 
         React.createElement("h5", null, "VideoPlayer"), 
-        React.createElement("p", null, React.createElement(Link, {to: "story", params: {storyId: this.props.story.story_id}}, this.props.story.story_id, ": ", this.props.story.uuid)), 
+        React.createElement("p", null, React.createElement(Link, {to: "stories", params: {storyId: this.props.story.id}}, this.props.story.id, ": ", this.props.story.uuid)), 
         React.createElement("p", null, "Reporter: ", this.props.story.reporter_id), 
         React.createElement("p", null, "Date: ", this.props.story.timestamp)
       )

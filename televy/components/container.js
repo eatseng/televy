@@ -7,17 +7,18 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * React client application entry point
+ * Top level route wrapper
  */
 
-require('./styles/app.css')
-require('./styles/navbar.css')
-require('./styles/story-card.css')
-
-var React = require('react')
+var React = require("react")
 var Router = require('react-router')
-var routes = require('./routes')
+var RouteHandler = Router.RouteHandler;
+var NavBar = require("./navMain")
 
-Router.run(routes, Router.HistoryLocation, function(Handler, state) {
-  React.render(React.createElement(Handler, window.value), document.getElementById('container'))
-})
+module.exports = React.createClass({displayName: "exports",
+  render: function () {
+    return (
+      React.createElement(RouteHandler, {data: this.props.data})
+    );
+  }
+});

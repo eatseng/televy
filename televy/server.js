@@ -12,72 +12,55 @@
 
 var express = require('express');
 var fs = require('fs');
-var React = require('react');
-var Router = require('react-router');
-var routes = require('./routes')
 var path = require('path');
-var favicon = require('serve-favicon');
+var reactRouter = require('./routes/reactRouter');
+
+// Setup environmental properties
+require('./configs/env');
+console.log(process.env['CONSUMER_KEY'])
+
+// Model Routes
+apiRoute = require('./routes/apis');
+reportRoute = require('./routes/reports');
+storyRoute = require('./routes/stories');
+indexRoute = require('./routes/index');
+
+// Models
+var reportModel = require('./models/report');
 
 // Util functions
 var write = require('./utils/write');
-var testData = require('./tests/scaffolds')
+var testData = require('./tests/scaffolds');
 
-// webpack js files for client/server sync
+// webpack js files for client/server isomorphic sync
 var bundleJS = fs.readFileSync(__dirname + '/public/js/bundle.js');
 
 // Setup express
 var app = express();
+
+// Setup Favicon
+var favicon = require('serve-favicon');
 app.use(favicon(__dirname + '/public/favicomatic/favicon.ico'));
 
 // View engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// Link-up express handler with react-router
+// Routes
+app.use("/", indexRoute);
+app.use("/api", apiRoute);
+app.use("/reports", reportRoute);
+app.use("/stories", storyRoute);
+
+// Load package and 404
 app.use(function(req, res, next) {
   switch (req.path) {
-    case "/api/stories":
 
-      // Log on terminal
-      console.log(req.path + " " + new Date().toString());
-      if (req.query.id == undefined) {
-        props = testData["api"]
-      } else {
-        var id = req.query.id - 1
-        props = testData["api"]["stories"][id]
-      }
-      props["server_rendering"] = false;
-      return res.status(200).send(JSON.stringify(props));
-
-    case "/name":
-      return res.send("Paul, " + new Date().toString());
-    
-    case "/favicon.ico":
-      // TODO: Add favicon
-      return
-    
     case "/public/js/bundle.js":
       return write(bundleJS, 'text/javascript', res);
     
-    case "/story/public/js/bundle.js":
-      return write(bundleJS, 'text/javascript', res);
-    
     default:
-      // Log on terminal
-      console.log(req.path + " " + new Date().toString());
-      if (req.path == "/story/4") {
-        props = testData["api"]
-      } else {
-        props = testData["initial"]
-      }
-      // Add custom server side data rendering identifier
-      props["server_rendering"] = true;
-      
-      var router = Router.create({location: req.path, routes: routes});
-      router.run(function(Handler, state) {
-        var html = React.renderToString(React.createElement(Handler, props));
-        return res.render('index', {jsonValue: props, html: html});
-      })
+      return write("404 The page you request for is somewhere out there..", 'text/text', res); 
   }
 })
 

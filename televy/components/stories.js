@@ -11,10 +11,13 @@
  */
 
 var React = require("react")
+var Router = require('react-router')
 var SearchBox = require("./searchBox")
 var VideoPlayer = require("./videoPlayer")
 var StoryStore = require("../stores/storyStore")
 var StoryAction = require("../actions/storyActions")
+
+var Link = Router.Link;
 
 var Stories = React.createClass({displayName: "Stories",
 
@@ -24,9 +27,10 @@ var Stories = React.createClass({displayName: "Stories",
     };
   },
 
-  componentDidMount: function() {
+  componentDidMount: function () {
     // console.log("stories mounted")
     // console.log(this.props)
+    StoryStore.addChangeListener(this._onChange);
 
     // Get new data from API if this page is being revisited
     if (window.value.server_rendering == true ){
@@ -34,21 +38,38 @@ var Stories = React.createClass({displayName: "Stories",
     } else {
       StoryAction.getAll()
     }
-
-    StoryStore.addChangeListener(this._onChange);
   },
 
-  componentWillUnmount: function() {
+  componentWillUnmount: function () {
     StoryStore.removeChangeListener(this._onChange);
   },
 
   render: function () {
+    var self = this;
+
+    var storyCardStyle = {
+      cursor: 'pointer'
+    }
     
     var stories = null
     if (this.state.stories.length > 0) {
       stories = this.state.stories.map(function (story) {
         return (
-          React.createElement(VideoPlayer, {key: story.id, story: story}
+          React.createElement("div", {key: story.id, className: "story-card"}, 
+            React.createElement("div", {className: "story-card-image", style: storyCardStyle}, 
+              React.createElement("p", null, React.createElement(Link, {to: "storyid", params: {storyId: story.id}}, story.headline))
+            ), 
+            React.createElement("div", {className: "story-card-footer"}, 
+              React.createElement("div", {className: "firstPane"}, "Votes"), 
+              React.createElement("div", {className: "secondPane"}, 
+                React.createElement("p", null, "#izzyjames"), 
+                React.createElement("p", null, "#cocahella #indo #OVO")
+              ), 
+              React.createElement("div", {className: "thirdPane"}, 
+                React.createElement("p", null, "Lots of Comments")
+              ), 
+              React.createElement("div", {className: "fourthPane"}, "CiPan")
+            )
           )
         );
       });
@@ -74,7 +95,7 @@ var Stories = React.createClass({displayName: "Stories",
   /**
    * Event handler for 'change' events coming from the StoryStore
    */
-  _onChange: function() {
+  _onChange: function () {
     this.setState({stories: StoryStore.getAll()});
   }
 
