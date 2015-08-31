@@ -10,14 +10,14 @@
  * React client application entry point
  */
 
-require('./styles/app.css')
-require('./styles/navbar.css')
-require('./styles/story-card.css')
+require('./styles/app.css');
+require('./styles/navbar.css');
+require('./styles/cards.css');
 
-var React = require('react')
-var Router = require('react-router')
-var routes = require('./routes')
+var React = require('react');
+var Router = require('react-router');
+var routes = require('./routes');
 
 Router.run(routes, Router.HistoryLocation, function(Handler, state) {
   React.render(React.createElement(Handler, window.value), document.getElementById('container'))
-})
+});

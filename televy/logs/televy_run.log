@@ -1,0 +1,73 @@
+[2015-08-28 11:11:47.206] [INFO] console - Example app listening at http://0.0.0.0:3000
+[2015-08-28 11:12:35.016] [INFO] console - /api/reports endpoint
+[2015-08-28 11:12:35.016] [INFO] console - /reports
+[2015-08-28 11:12:36.153] [ERROR] apis - testing
+[2015-08-28 11:14:54.403] [INFO] console - Example app listening at http://0.0.0.0:3000
+[2015-08-28 11:15:05.509] [ERROR] apis - testing
+[2015-08-28 11:16:50.221] [ERROR] apis - testing
+[2015-08-28 11:18:16.987] [ERROR] apis - testing
+[2015-08-28 11:18:31.353] [ERROR] apis - testing
+[2015-08-28 11:19:46.019] [ERROR] apis - testing
+[2015-08-28 11:32:04.922] [INFO] apis - /api/reports?id=a
+[2015-08-28 13:53:34.815] [INFO] reports - /api/reports?reportId=3
+[2015-08-28 13:53:43.770] [INFO] index - /
+[2015-08-28 13:53:45.744] [INFO] apis - /api/stories?storyId=27
+[2015-08-28 13:53:45.746] [INFO] apis - /api/reports?storyId=27
+[2015-08-28 13:53:47.517] [INFO] apis - /api/stories index endpoint
+[2015-08-28 13:53:49.098] [INFO] apis - /api/stories?storyId=2
+[2015-08-28 13:53:49.099] [INFO] apis - /api/reports?storyId=2
+[2015-08-28 13:53:53.509] [INFO] apis - /api/reports?id=5
+[2015-08-28 13:54:00.090] [INFO] apis - /api/stories index endpoint
+[2015-08-28 13:54:05.670] [INFO] apis - /api/stories?storyId=2
+[2015-08-28 13:54:05.671] [INFO] apis - /api/reports?storyId=2
+[2015-08-28 13:54:10.070] [INFO] apis - /api/reports?id=4
+[2015-08-28 13:54:13.049] [INFO] apis - /api/stories index endpoint
+[2015-08-31 09:56:43.351] [INFO] apis - /api/stories?storyId=2
+[2015-08-31 09:56:58.211] [INFO] apis - /api/stories?storyId=1
+[2015-08-31 09:57:45.603] [INFO] stories - /stories/1
+[2015-08-31 10:25:00.983] [INFO] stories - /stories index
+[2015-08-31 10:25:15.688] [INFO] stories - /stories index
+[2015-08-31 10:25:36.911] [INFO] stories - /stories index
+[2015-08-31 10:25:58.885] [INFO] stories - /stories index
+[2015-08-31 10:29:17.877] [INFO] stories - /stories index
+[2015-08-31 10:29:47.379] [INFO] stories - /stories index
+[2015-08-31 10:30:53.737] [INFO] stories - /stories index
+[2015-08-31 11:12:51.974] [INFO] stories - /stories index
+[2015-08-31 11:41:02.750] [INFO] stories - /stories index
+[2015-08-31 11:41:10.151] [INFO] stories - /stories/2
+[2015-08-31 11:41:15.659] [INFO] stories - /stories/1
+[2015-08-31 11:41:21.618] [INFO] stories - /stories/2
+[2015-08-31 11:41:23.184] [INFO] stories - /stories index
+[2015-08-31 11:41:27.205] [INFO] apis - /api/stories?storyId=28
+[2015-08-31 11:41:27.207] [INFO] apis - /api/reports?storyId=28
+[2015-08-31 11:41:29.239] [INFO] apis - /api/stories index endpoint
+[2015-08-31 11:41:38.008] [INFO] apis - /api/stories?storyId=1
+[2015-08-31 11:41:38.008] [INFO] apis - /api/reports?storyId=1
+[2015-08-31 11:41:46.575] [INFO] apis - /api/stories index endpoint
+[2015-08-31 11:43:27.206] [INFO] apis - /api/stories?storyId=28
+[2015-08-31 11:43:29.241] [INFO] apis - /api/stories index endpoint
+[2015-08-31 11:48:28.776] [INFO] reports - /api/reports?reportId=103
+[2015-08-31 11:50:16.008] [INFO] reports - /api/reports?reportId=103
+[2015-08-31 11:50:18.132] [INFO] index - /
+[2015-08-31 11:50:24.311] [INFO] index - /
+[2015-08-31 11:52:19.997] [INFO] stories - /stories/1
+[2015-08-31 11:52:43.189] [INFO] stories - /stories/2
+[2015-08-31 11:53:02.835] [INFO] stories - /stories/1
+[2015-08-31 11:53:06.342] [INFO] apis - /api/stories index endpoint
+[2015-08-31 11:53:15.823] [INFO] index - /
+[2015-08-31 11:53:18.836] [INFO] apis - /api/stories?storyId=6
+[2015-08-31 11:53:18.837] [INFO] apis - /api/reports?storyId=6
+[2015-08-31 11:55:18.838] [INFO] apis - /api/stories?storyId=6
+[2015-08-31 11:55:18.839] [INFO] apis - /api/reports?storyId=6
+[2015-08-31 12:09:03.518] [INFO] stories - /stories/6
+[2015-08-31 12:09:05.028] [INFO] apis - /api/stories index endpoint
+[2015-08-31 12:09:27.835] [INFO] index - /
+[2015-08-31 12:36:43.956] [INFO] index - /
+[2015-08-31 12:36:46.677] [INFO] apis - /api/stories?storyId=6
+[2015-08-31 12:36:46.680] [INFO] apis - /api/reports?storyId=6
+[2015-08-31 12:36:51.428] [INFO] apis - /api/stories index endpoint
+[2015-08-31 12:36:57.364] [INFO] apis - /api/stories?storyId=1
+[2015-08-31 12:36:57.366] [INFO] apis - /api/reports?storyId=1
+[2015-08-31 12:37:12.301] [INFO] apis - /api/stories index endpoint
+[2015-08-31 12:37:19.092] [INFO] apis - /api/stories?storyId=2
+[2015-08-31 12:37:19.095] [INFO] apis - /api/reports?storyId=2

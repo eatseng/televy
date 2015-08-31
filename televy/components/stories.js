@@ -34,9 +34,9 @@ var Stories = React.createClass({displayName: "Stories",
 
     // Get new data from API if this page is being revisited
     if (window.value.server_rendering == true ){
-      window.value.server_rendering = false
+      window.value.server_rendering = false;
     } else {
-      StoryAction.getAll()
+      StoryAction.getAll();
     }
   },
 
@@ -49,9 +49,9 @@ var Stories = React.createClass({displayName: "Stories",
 
     var storyCardStyle = {
       cursor: 'pointer'
-    }
+    };
     
-    var stories = null
+    var stories = null;
     if (this.state.stories.length > 0) {
       stories = this.state.stories.map(function (story) {
         return (
@@ -101,4 +101,4 @@ var Stories = React.createClass({displayName: "Stories",
 
 });
 
-module.exports = Stories
+module.exports = Stories;

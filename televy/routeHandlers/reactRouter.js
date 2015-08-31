@@ -12,4 +12,4 @@ var reactRouter = module.exports = function (path, data, res) {
     var html = React.renderToString(React.createElement(Handler, data));
     return res.render('index', {jsonValue: data, html: html});
   })
-}
+};

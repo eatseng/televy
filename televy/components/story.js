@@ -60,9 +60,9 @@ var Story = React.createClass({displayName: "Story",
 
     var reportCardStyle = {
       cursor: 'pointer'
-    }
+    };
     
-    var reports = null
+    var reports = null;
     if (this.state.reports.length > 0) {
       reports = this.state.reports.map(function (report) {
         return (

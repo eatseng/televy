@@ -10,10 +10,15 @@
  * Stories route handlers
  */
 
+var async = require('async');
 var express = require('express');
 var router = express.Router();
-var reactRouter = require('../routes/reactRouter');
-var async = require('async')
+var reactRouter = require('../routeHandlers/reactRouter');
+
+// Setup Logging
+var log4js = require('log4js');
+var logger = log4js.getLogger('stories')
+logger.setLevel("INFO")
 
 // Models
 var StoryModel = require('../models/story');
@@ -26,25 +31,22 @@ var write = require('../utils/write');
 /* GET story index page. */
 router.get('/', function (req, res) {
 
-  console.log("/stories endpoint")
-  console.log(req.path)
+  logger.info("/stories index")
 
   Story = new StoryModel();
-  Story.listAll(function (err, response) {
-    if (err) {
-      write("Error - " + response["content"], "application/text", res);
-    } else {
-      reactRouter("/stories", {stories: response["content"], server_rendering: true}, res);    
-    }
-  });
+  Story.listAll()
+    .then(function (response) {
+      return reactRouter("/stories", {stories: response["content"], server_rendering: true}, res);    
+    })
+    .catch(function (err) {
+      logger.error("Error - " + err["content"]);
+      return write("Error - " + err["content"], "application/text", res);
+    });
 });
 
 /* GET story page. */
 router.get('/:storyId', function (req, res) {
 
-  console.log("/stories/:storyId endpoint")
-  console.log(req.path)
-  
   var storyId = req.params.storyId;
 
   Story = new StoryModel();
@@ -52,16 +54,23 @@ router.get('/:storyId', function (req, res) {
 
   if (storyId != undefined) {
 
+    logger.info("/stories/" + storyId)
+
     async.series({
       stories: function (callback_next) {
-        Story.get(storyId, callback_next);
+        return Story.get(storyId)
+                    .then(function (response) { return callback_next(null, response); })
+                    .catch(function (err) { return callback_next(err, null); });
       },
       reports: function (callback_next) {
-        Report.getStory(storyId, callback_next);
+        return Report.getStory(storyId)
+                    .then(function (response) { return callback_next(null, response); })
+                    .catch(function (err) { return callback_next(err, null); });
       }
     }, function (err, results) {
       if (err) {
-        write("Error - " + storyResponse["content"], "application/text", res);
+        logger.error("Error - " + err["content"])
+        return write("Error - " + err["content"], "application/text", res);
       } else {
 
         var payload = {
@@ -69,12 +78,12 @@ router.get('/:storyId', function (req, res) {
           reports: results["reports"]["content"],
           server_rendering: true
         };
-        reactRouter("/stories/" + storyId, payload, res);
+        return reactRouter("/stories/" + storyId, payload, res);
       }
     });
   
   } else {
-    write("404 Something's gone wrong", "text/text", res);
+    return write("404 Something's gone wrong", "text/text", res);
   }
 });
 

@@ -13,6 +13,7 @@
 // API routes addresses
 var apiRequest = require("../utils/cronkiteAPI");
 
+
 function Story(params) {
   if (params != undefined) {
     null;
@@ -29,25 +30,25 @@ function Story(params) {
   };
 };
 
-Story.prototype.listAll = function (callback) {
+Story.prototype.listAll = function () {
 
-  apiRequest(this.options, {"op": "List"}, callback);
+  return apiRequest(this.options, {"op": "List"});
 
 };
 
-Story.prototype.redditHot = function (callback) {
+Story.prototype.redditHot = function () {
 
   var query = {"op": "List", "queryOptions": [{"type": "Order", "field": "reddit_hot", "isAsc": false}]};
 
-  apiRequest(this.options, query, callback);
+  return apiRequest(this.options, query);
 
 };
 
-Story.prototype.get = function (id, callback) {
+Story.prototype.get = function (id) {
 
   var query = {"op": "List", "queryOptions": [{"type": "FilterPredicate", "field": "id", "value": id}]};
 
-  apiRequest(this.options, query, callback);
+  return apiRequest(this.options, query);
 
 }
 

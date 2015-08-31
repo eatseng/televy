@@ -13,6 +13,7 @@
 var Dispatcher = require('../dispatcher/televyDispatcher');
 var EventEmitter = require('events').EventEmitter;
 var ReportConstants = require('../constants/reportConstants');
+var ReportModel = require('../models/report')
 var assign = require('object-assign');
 var $ = require('jquery');
 
@@ -32,18 +33,30 @@ function create(text) {
 function get(rid, callback) {
   // Get story from the server
   $.getJSON("/api/reports", {id: rid}, callback);
+  // Report = new ReportModel();
+  // Report.get(rid)
+  //   .then(function (response) { callback({reports: response["content"]}); })
+  //   .catch(function (err) { callback({reports: null}); });
   // console.log("STORE LAUNCHED AJAX")
 };
 
 function getAll(callback) {
   // Get all the story from the server
   $.getJSON("/api/reports", callback);
+  // Report = new ReportModel();
+  // Report.listAll()
+  //   .then(function (response) { callback({reports: response["content"]}); })
+  //   .catch(function (err) { callback({reports: null}); });
   // console.log("STORE LAUNCHED AJAX")
 };
 
 function getStoryReports(sid, callback) {
   // Get story from the server
   $.getJSON("/api/reports", {storyId: sid}, callback);
+  // Report = new ReportModel();
+  // Report.getStory(sid)
+  //   .then(function (response) { callback({reports: response["content"]}); })
+  //   .catch(function (err) { callback({reports: null}); });
   // console.log("STORE LAUNCHED AJAX")
 };
 
@@ -56,6 +69,7 @@ function destory(id) {
   // Send id to server
   // If resp == 200 update private variables
 };
+
 
 var ReportStore = assign({}, EventEmitter.prototype, {
   getAll: function () {
@@ -137,4 +151,3 @@ ReportStore.dispatchToken = Dispatcher.register(function (action) {
 });
 
 module.exports = ReportStore;
-

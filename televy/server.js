@@ -13,24 +13,26 @@
 var express = require('express');
 var fs = require('fs');
 var path = require('path');
-var reactRouter = require('./routes/reactRouter');
+var reactRouter = require('./routeHandlers/reactRouter');
+
+// Setup Logger
+var log4js = require('log4js');
+var logConfig = require('./configs/log4jsConfig')
+log4js.configure(logConfig, {})
+log4js.loadAppender('file');
 
 // Setup environmental properties
-// require('./configs/env');
+require('./configs/env');
 // console.log(process.env['CONSUMER_KEY'])
 
-// Model Routes
-apiRoute = require('./routes/apis');
-reportRoute = require('./routes/reports');
-storyRoute = require('./routes/stories');
-indexRoute = require('./routes/index');
-
-// Models
-var reportModel = require('./models/report');
+// Handlers
+var apiHandler = require('./routeHandlers/apis');
+var indexHandler = require('./routeHandlers/index');
+var reportHandler = require('./routeHandlers/reports');
+var storyHandler = require('./routeHandlers/stories');
 
 // Util functions
 var write = require('./utils/write');
-var testData = require('./tests/scaffolds');
 
 // webpack js files for client/server isomorphic sync
 var bundleJS = fs.readFileSync(__dirname + '/public/js/bundle.js');
@@ -47,22 +49,21 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // Routes
-app.use("/", indexRoute);
-app.use("/api", apiRoute);
-app.use("/reports", reportRoute);
-app.use("/stories", storyRoute);
+app.use("/", indexHandler);
+app.use("/api", apiHandler);
+app.use("/reports", reportHandler);
+app.use("/stories", storyHandler);
 
 // Load package and 404
 app.use(function(req, res, next) {
   switch (req.path) {
-
     case "/public/js/bundle.js":
       return write(bundleJS, 'text/javascript', res);
     
     default:
       return write("404 The page you request for is somewhere out there..", 'text/text', res); 
-  }
-})
+  };
+});
 
 // For web servering through Heroku
 var port = process.env.PORT || 3000;

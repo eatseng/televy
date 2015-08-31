@@ -10,11 +10,11 @@
  * Navigation Bar
  */
 
-var React = require("react")
-var Router = require('react-router')
+var React = require("react");
+var Router = require('react-router');
 
 var Link = Router.Link;
-var app = require('./app')
+var app = require('./app');
 
 var NavMain = React.createClass({displayName: "NavMain",
   render: function () {
@@ -28,4 +28,4 @@ var NavMain = React.createClass({displayName: "NavMain",
   }
 });
 
-module.exports = NavMain
+module.exports = NavMain;

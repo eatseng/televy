@@ -10,10 +10,10 @@
  * Top level route wrapper
  */
 
-var React = require("react")
-var Router = require('react-router')
+var React = require("react");
+var Router = require('react-router');
 var RouteHandler = Router.RouteHandler;
-var NavBar = require("./navMain")
+var NavBar = require("./navMain");
 
 module.exports = React.createClass({displayName: "exports",
   render: function () {

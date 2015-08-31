@@ -11,36 +11,79 @@
  */
 
 var http = require('http')
-var querystring = require('querystring');
+var Promise = require('promise')
 
-var apiCall = module.exports = function (endPointOptions, payload, callback) {
+var apiCall = module.exports = function (endPointOptions, payload) {
 
-  var data = JSON.stringify(payload);
+  return new Promise (function (resolve, reject) {
 
-  var req = http.request(endPointOptions, function(resp) {
-    var str;
+    var data = JSON.stringify(payload);
 
-    resp.setEncoding('utf8');
-    resp.on('data', function (chunk) {
-      str += chunk;
-    });
+    var req = http.request(endPointOptions, function(resp) {
+      var str;
 
-    resp.on('end', function () {
-      callback(null, {
-        statusCode: resp.statusCode,
-        content: JSON.parse(str.slice(str.indexOf('[')))
+      resp.setEncoding('utf8');
+      resp.on('data', function (chunk) {
+        str += chunk;
+      });
+
+      resp.on('end', function () {
+
+        if (payload["op"].toLowerCase() == "list") {
+          var content = JSON.parse(str.slice(str.indexOf('[')));
+        } else {
+          var content = str;
+        }
+
+        resolve({
+          statusCode: resp.statusCode,
+          content: content
+        });
       });
     });
-  });
 
-  req.on('error', function (e) {
-    callback(e, {
-      statusCode: 520,
-      content: e
-    })
-  });
+    req.on('error', function (e) {
+      reject({
+        statusCode: 520,
+        content: e
+      })
+    });
 
-  // write data to request body
-  req.write(data);
-  req.end();
+    // write data to request body
+    req.write(data);
+    req.end();
+  });
 };
+
+// var apiCall = module.exports = function (endPointOptions, payload, callback) {
+
+//   var data = JSON.stringify(payload);
+
+//   var req = http.request(endPointOptions, function(resp) {
+//     var str;
+
+//     resp.setEncoding('utf8');
+//     resp.on('data', function (chunk) {
+//       str += chunk;
+//     });
+
+//     resp.on('end', function () {
+//       callback(null, {
+//         statusCode: resp.statusCode,
+//         content: JSON.parse(str.slice(str.indexOf('[')))
+//       });
+//     });
+//   });
+
+//   req.on('error', function (e) {
+//     callback(e, {
+//       statusCode: 520,
+//       content: e
+//     })
+//   });
+
+//   // write data to request body
+//   req.write(data);
+//   req.end();
+// };
+

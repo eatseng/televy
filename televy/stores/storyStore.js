@@ -13,6 +13,7 @@
 var Dispatcher = require('../dispatcher/televyDispatcher');
 var EventEmitter = require('events').EventEmitter;
 var StoryConstants = require('../constants/storyConstants');
+var StoryModel = require('../models/story')
 var assign = require('object-assign');
 var $ = require('jquery');
 
@@ -27,19 +28,27 @@ function create(text) {
   // Send data to server
   // Get id from server response
   // Update private variables
-  
-
 };
 
 function get(sid, callback) {
   // Get story from the server
   $.getJSON("/api/stories", {id: sid}, callback);
+  // console.log("STORY STORE GET")
+  // console.log(sid)
+  // Story = new StoryModel()
+  // Story.get(sid)
+  //   .then(function (response) { callback({stories: response["content"]}); })
+  //   .catch(function (err) { callback({stories: null}); });
   // console.log("STORE LAUNCHED AJAX")
 };
 
 function getAll(callback) {
   // Get all the story from the server
   $.getJSON("/api/stories", callback);
+  // Story = new StoryModel()
+  // Story.listAll()
+  //   .then(function (response) { callback({stories: response["content"]}); })
+  //   .catch(function (err) { callback({stories: null}); });
   // console.log("STORE LAUNCHED AJAX")
 };
 
@@ -52,6 +61,7 @@ function destory(id) {
   // Send id to server
   // If resp == 200 update private variables
 };
+
 
 var StoryStore = assign({}, EventEmitter.prototype, {
   getAll: function () {

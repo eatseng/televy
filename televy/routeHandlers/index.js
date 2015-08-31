@@ -12,7 +12,12 @@
 
 var express = require('express');
 var router = express.Router();
-var reactRouter = require('../routes/reactRouter');
+var reactRouter = require('../routeHandlers/reactRouter');
+
+// Setup Logging
+var log4js = require('log4js');
+var logger = log4js.getLogger('index')
+logger.setLevel("INFO")
 
 // Models
 var StoryModel = require('../models/story');
@@ -25,14 +30,16 @@ var write = require('../utils/write');
 router.get('/', function (req, res) {
 
   Story = new StoryModel();
-  Story.listAll(function (err, response) {
-    if (err) {
-      write("Error - " + response["content"], "application/text", res);
-    } else {
-      reactRouter("/stories", {stories: response["content"], server_rendering: true}, res);
-    }
-  });
-
+  logger.info("/")
+  Story.redditHot()
+    .then(function (response) {
+      return reactRouter("/stories", {stories: response["content"], server_rendering: true}, res);
+    })
+    .catch(function (err) {
+      logger.error("Error - " + err["content"])
+      return write("Error - " + err["content"], "application/text", res);
+    });
+    
 });
 
 module.exports = router;

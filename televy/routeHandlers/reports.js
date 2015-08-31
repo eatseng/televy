@@ -12,8 +12,13 @@
 
 var express = require('express');
 var router = express.Router();
-var reactRouter = require('../routes/reactRouter');
+var reactRouter = require('../routeHandlers/reactRouter');
 var async = require('async')
+
+// Setup Logging
+var log4js = require('log4js');
+var logger = log4js.getLogger('reports')
+logger.setLevel("INFO")
 
 // Models
 var ReportModel = require('../models/report');
@@ -40,23 +45,25 @@ var write = require('../utils/write');
 
 /* GET story page. */
 router.get('/:reportId', function (req, res) {
-
-  console.log("/reports/:reportId endpoint")
-  console.log(req.path)
   
   var reportId = req.params.reportId;
 
   Report = new ReportModel();
 
   if (reportId != undefined) {
-    Report.get(reportId, function (err, response) {
-      if (err) {
-        write("Error - " + response["content"], "application/text", res);
-      } else {
+
+    logger.info("/api/reports?reportId=" + reportId)
+
+    Report.get(reportId)
+      .then(function (response) {
         var payload = {reports: response["content"], server_rendering: true};
-        reactRouter("/reports/" + reportId, payload, res);
-      }
-    });
+        return reactRouter("/reports/" + reportId, payload, res);
+      })
+      .catch(function (err) {
+        logger.error("Error - " + err["content"])
+        return write("Error - " + err["content"], "application/text", res);
+      });
+  
   } else {
     write("404 Something's gone wrong", "text/text", res);
   }

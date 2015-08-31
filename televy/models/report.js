@@ -10,7 +10,6 @@
  * Report Model
  */
 
-
 // API routes addresses
 var apiRequest = require("../utils/cronkiteAPI");
 
@@ -31,22 +30,28 @@ function Report(params) {
   };
 };
 
-Report.prototype.listAll = function (callback) {
-  apiRequest(this.options, {"op": "List"}, callback);
+Report.prototype.listAll = function () {
+  
+  return apiRequest(this.options, {"op": "List"});
+
 };
 
-Report.prototype.get = function (rid, callback) {
+Report.prototype.get = function (rid) {
+
   var query = {"op": "List",
                "queryOptions": [{"type": "FilterPredicate", "field": "id", "value": rid}]
               };
-  apiRequest(this.options, query, callback);
+  return apiRequest(this.options, query);
+
 };
 
-Report.prototype.getStory = function (sid, callback) {
+Report.prototype.getStory = function (sid) {
+
   var query = {"op": "List",
                "queryOptions": [{"type": "FilterPredicate", "field": "story_id", "value": sid}]
               };
-  apiRequest(this.options, query, callback);
+  return apiRequest(this.options, query);
+
 };
 
 module.exports = Report;

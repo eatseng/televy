@@ -46,7 +46,7 @@ var dataReport = {
     {
       "type": "FilterPredicate",
       "field": "story_id",
-      "value": "6"
+      "value": "2"
     }
   ]
 }
@@ -70,8 +70,68 @@ var callback = function (err, response) {
   }
 };
 
+var optionsComment = {
+  hostname: "cronkiteapp.herokuapp.com",
+  port: 80,
+  path: "/api/comment",
+  method: 'POST',
+  headers: {
+    "Content-Type": "application/json"
+  }
+};
+
+var dataComment = {
+  "op": "List",
+  "queryOptions": [
+    {
+      "type": "Order",
+      "field": "id",
+      "isAsc": true
+    }
+  ]
+}
+
+var optionsVote = {
+  hostname: "cronkiteapp.herokuapp.com",
+  port: 80,
+  path: "/api/vote",
+  method: 'POST',
+  headers: {
+    "Content-Type": "application/json"
+  }
+};
+
+var dataVote = {
+  "op": "List",
+  "queryOptions": [
+    {
+      "type": "Order",
+      "field": "id",
+      "isAsc": true
+    }
+  ]
+}
+
+var dataVote1 = {
+  "op": "new",
+  "report_id": 11,
+  "location": { "latitude": 37.35202924229696, "longitude": -121.99974886124 },
+  "timestamp": 1440879374629,
+  "vote_value": 'Up',
+  "user_id": '4kQRUZSF6K',
+  "story_id": 6
+}
+
 // apiRequest(optionsStory, dataStory, callback)
-apiRequest(optionsReport, dataReport, callback)
+apiRequest(optionsVote, dataVote)
+  .then(function (response) {
+    console.log(response["content"])
+    console.log(response)
+  })
+  .catch(function (err) {
+    console.log("error")
+    console.log(err["content"])
+  });
 
 // var http = require('http')
 // var querystring = require('querystring');
