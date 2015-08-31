@@ -12,9 +12,12 @@
         remote = origin
         merge = refs/heads/master
 [remote "heroku"]
+
         url = https://git.heroku.com/televy-web.git
         fetch = +refs/heads/*:refs/remotes/heroku/*
-
+[remote "github"]
+        url = https://github.com/eatseng/televy.git
+        fetch = +refs/heads/*:refs/remotes/github/*
 
 televy/components/.module-cache/*
 televy/components/jsx/*

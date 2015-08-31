@@ -105,28 +105,36 @@ var dataVote = {
   "op": "List",
   "queryOptions": [
     {
+      "type": "FilterPredicate",
+      "field": "story_id",
+      "value": "6"
+    },
+    {
       "type": "Order",
-      "field": "id",
+      "field": "timestamp",
       "isAsc": true
     }
   ]
 }
 
 var dataVote1 = {
-  "op": "new",
-  "report_id": 11,
-  "location": { "latitude": 37.35202924229696, "longitude": -121.99974886124 },
-  "timestamp": 1440879374629,
-  "vote_value": 'Up',
-  "user_id": '4kQRUZSF6K',
-  "story_id": 6
+  "op": "remove",
+  "vote": {
+    "report_id": 11,
+    "location": { "latitude": 37.35202924229696, "longitude": -121.99974886124 },
+    "timestamp": 1440879374629,
+    "vote_value": 'Up',
+    "user_id": 'MADEUP',
+    "id": 159,
+    "story_id": 6
+  }
 }
 
 // apiRequest(optionsStory, dataStory, callback)
-apiRequest(optionsVote, dataVote)
+apiRequest(optionsComment, dataComment)
   .then(function (response) {
     console.log(response["content"])
-    console.log(response)
+    // console.log(response)
   })
   .catch(function (err) {
     console.log("error")

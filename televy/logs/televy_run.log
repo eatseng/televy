@@ -71,3 +71,9 @@
 [2015-08-31 12:37:12.301] [INFO] apis - /api/stories index endpoint
 [2015-08-31 12:37:19.092] [INFO] apis - /api/stories?storyId=2
 [2015-08-31 12:37:19.095] [INFO] apis - /api/reports?storyId=2
+[2015-08-31 15:29:38.083] [INFO] apis - /api/stories?storyId=27
+[2015-08-31 15:29:38.090] [INFO] apis - /api/reports?storyId=27
+[2015-08-31 15:29:43.722] [INFO] apis - /api/stories index endpoint
+[2015-08-31 15:29:47.016] [INFO] apis - /api/stories?storyId=27
+[2015-08-31 15:29:47.018] [INFO] apis - /api/reports?storyId=27
+[2015-08-31 15:29:48.376] [INFO] apis - /api/reports?id=102
